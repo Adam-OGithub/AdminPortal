@@ -1,0 +1,78 @@
+.button {
+  width: 120px;
+  height: 100px;
+  text-align: center;
+  line-height: 1.1em;
+  font-size: 1.1em;
+  color: black;
+  transition-duration: 0.4s;
+  margin-bottom: 0.3em;
+}
+.button:hover {
+  background-color: #c0925e; /* Green */
+  color: white;
+}
+
+.start {
+  background-color: #4caf50; /* Green */
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.stop {
+  background-color: #ff0000; /* Green */
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.update {
+  background-color: #cdf147; /* Green */
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.log {
+  background-color: #4ac6e6; /* Green */
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+.outLog {
+  height: 30em;
+  width: 50em;
+  overflow: auto;
+  background-color: rgb(116, 117, 115);
+  color: white;
+  scrollbar-base-color: gold;
+  font-family: sans-serif;
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+p1 {
+  color: white;
+  font-size: 1.5em;
+}
+
+ul {
+  list-style: "";
+}
+
+html {
+  background-color: black;
+  background-size: cover;
+}
