@@ -3,6 +3,8 @@ const startBtn = document.getElementById("startServer");
 const stopBtn = document.getElementById("stopServer");
 const updateBtn = document.getElementById("updateServer");
 const logBtn = document.getElementById("viewLogs");
+const checkBtn = document.getElementById("serverStatus");
+const statusUi = document.getElementById("statusui");
 const outLog = document.getElementById("outLogId");
 const msgStr = "Command sent successfully";
 
@@ -15,8 +17,12 @@ const createPost = (postData, url = "/api/post") => {
   })
     .then((response) => response.json())
     .then((data) => {
-      outLog.innerHTML = "";
-      outLog.innerHTML = data.Output;
+      if (data.serverStatus) {
+        isServerOnline(data.serverStatus);
+      } else {
+        outLog.innerHTML = "";
+        outLog.innerHTML = data.Output;
+      }
     });
   alert(msgStr);
 };
@@ -41,6 +47,20 @@ const updateServer = () => {
 const viewLogs = () => {
   updatePost("logs");
 };
+const checkStatus = () => {
+  updatePost("status");
+};
+const isServerOnline = (message) => {
+  setTimeout(() => {
+    if (message === "online") {
+      statusUi.classList.remove("offline");
+      statusUi.classList.add("online");
+    } else {
+      statusUi.classList.remove("online");
+      statusUi.classList.add("offline");
+    }
+  }, 2000);
+};
 
 startBtn.addEventListener("click", function () {
   startServer();
@@ -57,4 +77,8 @@ updateBtn.addEventListener("click", function () {
 logBtn.addEventListener("click", function () {
   viewLogs();
   outLog.classList.remove("hidden");
+});
+
+checkBtn.addEventListener("click", function () {
+  checkStatus();
 });

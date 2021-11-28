@@ -53,6 +53,21 @@ const runProcess = (filename, args) => {
   });
 };
 
+const readFile = (fileName) => {
+  try {
+    const data = fs.readFileSync(fileName, "utf8");
+    //return data;
+    return data.toString();
+  } catch (err) {
+    console.error(err);
+  }
+};
+const createObj = (label, input) => {
+  const Obj = {};
+  Obj[`${label}`] = input;
+  return Obj;
+};
+
 const startFactory = () => {
   runProcess("factorymanager.sh", "0");
 };
@@ -65,14 +80,8 @@ const updateFactory = () => {
   runProcess("factorymanager.sh", "2");
 };
 
-const viewLogsFactory = () => {
-  try {
-    const data = fs.readFileSync("factorylog", "utf8");
-    //return data;
-    return data.toString();
-  } catch (err) {
-    console.error(err);
-  }
+const checkStatus = () => {
+  runProcess("factorymanager.sh", "3");
 };
 
 //Post handler
@@ -94,11 +103,13 @@ app.post("/api/post", (req, res) => {
       break;
     case "logs":
       //
-      const outLog = viewLogsFactory();
-      console.log(outLog);
-      const outLogObj = {};
-      outLogObj["Output"] = outLog;
-      res.json(outLogObj);
+      const outLog = readFile("factorylog");
+      res.json(createObj("Output", outLog));
+      break;
+    case "status":
+      checkStatus();
+      const outStatus = readFile("serverstatus");
+      res.json(createObj("serverStatus", outStatus));
       break;
     default:
       console.log("User did not submit correct data");
